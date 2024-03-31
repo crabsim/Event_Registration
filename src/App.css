@@ -84,6 +84,8 @@ button:hover {
 .calendar-container {
   flex: 1;
   border: 1px solid black;
+  margin: 0.5rem;
+  padding: 1rem;
 }
 
 .events-list {
@@ -91,11 +93,6 @@ button:hover {
   overflow-y: scroll;
   border: 1px solid black;
 }
-
-/* .events-list h2 {
-  display: flex;
-  justify-content: center;
-} */
 
 .events-grid {
   display: flex;
@@ -106,8 +103,7 @@ button:hover {
 }
 
 .event-card, .selected-event-card {
-  width: 100%;
-  max-width: 300px;
+  width: 16rem;
   border: 0.1rem solid #ddd;
   border-radius: 0.4rem;
   padding: 1rem;
@@ -134,9 +130,12 @@ button:hover {
   background-color: rgb(232, 81, 81);
 }
 
-.event-card button:hover,
-.selected-event-card button:hover {
+.event-card button:hover {
   background-color: #0056b3;
+}
+
+.selected-event-card button:hover {
+  background-color: rgb(221, 56, 56);
 }
 
 .event-card h3,
@@ -166,7 +165,7 @@ button:hover {
   background-color: #ddd;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 768px) {
   .main > h2 {
     text-decoration: underline;
     margin-top: 4.4rem;

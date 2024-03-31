@@ -6,7 +6,7 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import { EventsList } from './components/EventsList';
 
 import {
-  countSelectedEvents,
+  getSelectedEvents,
   showMaxSelectedEventsError,
   findClashingEvent,
   showClashingEventsError,
@@ -23,6 +23,8 @@ const localizer = momentLocalizer(moment);
 const App = () => {
   const [events, setEvents] = useState([]);
   const [scrollToTime, setScrollToTime] = useState(defaultDate);
+
+  const selectedEvents = getSelectedEvents(events);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -48,33 +50,37 @@ const App = () => {
   }, []);
 
   const handleSelectEvent = (selectedEvent) => {
-    const selectedCount = countSelectedEvents(selectedEvents);
-
+    const selectedCount = selectedEvents.length;
+  
     if (selectedCount === MAX_SELECTED_EVENTS && !selectedEvent.selected) {
       showMaxSelectedEventsError();
       return;
     }
-
+  
     if (selectedEvent?.selected) {
-      const updatedEvents = getUpdatedEventsWithToggledSelection(events, selectedEvent);
-      setEvents(updatedEvents);
-      return;
+      toggleSelection(selectedEvent);
+    } else {
+      handleSelectNewEvent(selectedEvent);
     }
-
+  };
+  
+  const toggleSelection = (selectedEvent) => {
+    const updatedEvents = getUpdatedEventsWithToggledSelection(events, selectedEvent);
+    setEvents(updatedEvents);
+    setScrollToTime(new Date(selectedEvent?.start));
+  };
+  
+  const handleSelectNewEvent = (selectedEvent) => {
     const clashingEvent = findClashingEvent(selectedEvent, selectedEvents);
     if (clashingEvent) {
       showClashingEventsError(clashingEvent);
       return;
     }
-    else {
-      const updatedEvents = getUpdatedEventsWithToggledSelection(events, selectedEvent);
-      setEvents(updatedEvents);
-      setScrollToTime(new Date(selectedEvent?.start));
-    }
+  
+    toggleSelection(selectedEvent);
   };
 
-  const selectedEvents = events
-    .filter(event => event.selected);
+  
 
   return (
     <div className='main'>

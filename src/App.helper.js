@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 
 import { MAX_SELECTED_EVENTS } from './App.constants';
 
-export const countSelectedEvents = events => events.filter(event => event.selected).length;
+export const getSelectedEvents = events => events.filter(event => event.selected);
 
 export const showMaxSelectedEventsError = () =>
     toast.error(`Maximum number of events reached - ${MAX_SELECTED_EVENTS}. You cannot select more events.`);

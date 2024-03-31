@@ -1,38 +1,245 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 1.2rem;
+}
+
+h1, h2, h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+h1 {
+  text-decoration: underline;
+  margin-bottom: 3.2rem;
+}
+
+button {
+  background-color: #007BFF;
   color: white;
+  border: none;
+  border-radius: 0.4rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.App-link {
-  color: #61dafb;
+button:hover {
+  background-color: #0056b3;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.events-row {
+  display: flex;
+  justify-content: center;
+}
+
+.drawer-toggle,
+.calender-toggle {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1rem;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 0.4rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.drawer-toggle:hover,
+.calender-toggle:hover {
+  background-color: #0056b3;
+}
+
+.drawer-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.events-list, .drawer-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 42rem;
+  overflow-y: auto;
+  border: 1px solid black;
+  padding: 1rem;
+  margin: 0.5rem;
+}
+
+.calendar-container {
+  flex: 1;
+  border: 1px solid black;
+}
+
+.events-list {
+  height: 42rem;
+  overflow-y: scroll;
+  border: 1px solid black;
+}
+
+/* .events-list h2 {
+  display: flex;
+  justify-content: center;
+} */
+
+.events-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-height: 40rem;
+  overflow-y: scroll;
+}
+
+.event-card, .selected-event-card {
+  width: 100%;
+  max-width: 300px;
+  border: 0.1rem solid #ddd;
+  border-radius: 0.4rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #f9f9f9;
+}
+
+.selected-event-card {
+  background-color: #C4C4C4;
+}
+
+.event-card button,
+.selected-event-card button {
+  margin-top: 1rem;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 2.4rem;
+  background-color: #007BFF;
+  color: white;
+  cursor: pointer;
+}
+
+.selected-event-card button {
+  background-color: rgb(232, 81, 81);
+}
+
+.event-card button:hover,
+.selected-event-card button:hover {
+  background-color: #0056b3;
+}
+
+.event-card h3,
+.event-card p {
+  margin: 0;
+}
+
+.event-card button {
+  align-self: end;
+}
+
+.mobile-tabs {
+  display: none; /* Initially hide the tabs */
+}
+
+.tab {
+  flex: 1;
+  padding: 0.5rem;
+  background-color: #f2f2f2;
+  color: black;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.tab.active {
+  background-color: #ddd;
+}
+
+@media (max-width: 450px) {
+  .main > h2 {
+    text-decoration: underline;
+    margin-top: 4.4rem;
   }
-  to {
-    transform: rotate(360deg);
+
+  .main {
+    padding: 0.4rem;
+  }
+
+  .mobile-tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+  }
+
+  .events-container {
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  .events {
+    flex-direction: column;
+  }
+
+  .drawer-toggle {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 1rem;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 0.4rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+
+  .calender-toggle {
+    display: block;
+    position: absolute;
+    top: 36px;
+    right: 0;
+    margin: 1rem;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 0.4rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+
+  .drawer-list {
+    min-height: 40rem;
+  }
+
+  /* .events-grid,
+  .drawer-list {
+    height: max-content;
+    margin-bottom: 1.2rem;
+  }
+
+  .drawer-list {
+    width: 100%;
+    background-color: #f2f2f2;
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+  } */
+
+  .calendar-container {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 1rem;
   }
 }
